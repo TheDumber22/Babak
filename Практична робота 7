@@ -1,1 +1,32 @@
+#include <stdio.h>
+#include <math.h>
 
+int countIntersectionPoints(int x1, int y1, int r1, int x2, int y2, int r2) {
+    double distance = sqrt(pow(x2 - x1, 2) + pow(y2 - y1, 2));
+
+    if (distance < r1 + r2) {
+        if (distance > fabs(r1 - r2))
+            return 2;  // Два точки перетину
+        else if (distance == fabs(r1 - r2))
+            return 1;  // Одна точка перетину
+        else
+            return 0;  // Кола не перетинаються або торкаються
+    } else if (distance == r1 + r2) {
+        return 1;  // Одна точка перетину (кола торкаються)
+    } else {
+        return 0;  // Кола не перетинаються або торкаються
+    }
+}
+
+int main() {
+    int x1, y1, r1, x2, y2, r2;
+    printf("Введіть координати та радіус першого кола (x1, y1, r1): ");
+    scanf("%d %d %d", &x1, &y1, &r1);
+    printf("Введіть координати та радіус другого кола (x2, y2, r2): ");
+    scanf("%d %d %d", &x2, &y2, &r2);
+
+    int intersectionPoints = countIntersectionPoints(x1, y1, r1, x2, y2, r2);
+    printf("Кількість точок перетину: %d\n", intersectionPoints);
+
+    return 0;
+}
